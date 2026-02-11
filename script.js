@@ -1,8 +1,8 @@
-/* Safe DOM helpers */
+
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => Array.from(document.querySelectorAll(s));
 
-// Typing Animation (optional element)
+
 const textElement = $('.typing-text');
 const words = ['Full-Stack Engineer', 'Reliable Production Systems', 'API & Integrations'];
 if (textElement) {
@@ -24,14 +24,14 @@ if (textElement) {
     document.addEventListener('DOMContentLoaded', tick);
 }
 
-// Scroll reveal for elements with .fade-up
+
 const observerOptions = { threshold: 0.12 };
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, observerOptions);
 $$('.fade-up').forEach(el => revealObserver.observe(el));
 
-// Mobile menu toggle (safe checks)
+
 const hamburger = $('.hamburger');
 const navLinks = $('.nav-links');
 if (hamburger && navLinks) {
@@ -49,7 +49,7 @@ if (hamburger && navLinks) {
         }
     });
 
-    // Close menu on nav link click
+ 
     $$('.nav-links a').forEach(link => link.addEventListener('click', () => {
         navLinks.classList.remove('active');
         const spans = hamburger.querySelectorAll('span');
@@ -59,7 +59,6 @@ if (hamburger && navLinks) {
     }));
 }
 
-// Contact form handler: prevents actual submit, shows confirmation message
 const contactForm = $('form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -80,7 +79,7 @@ if (contactForm) {
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         if (submitBtn) submitBtn.textContent = 'Sending...';
 
-        // Simulate async send
+       
         setTimeout(() => {
             contactForm.reset();
             alert('Thanks — your message has been received. I will reply within 2 business days.');
@@ -90,14 +89,14 @@ if (contactForm) {
     });
 }
 
-// Certificates Carousel
+
 const certsGallery = $('#certsGallery');
 const certPrevBtn = $('#certPrevBtn');
 const certNextBtn = $('#certNextBtn');
 
 if (certsGallery && certPrevBtn && certNextBtn) {
     const cardWidth = certsGallery.querySelector('.certificate-card').offsetWidth;
-    const scrollAmount = (cardWidth + 24) * 4; // 4 cards + gap
+    const scrollAmount = (cardWidth + 24) * 4;
 
     certNextBtn.addEventListener('click', () => {
         certsGallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
