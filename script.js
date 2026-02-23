@@ -68,13 +68,13 @@ if (contactForm) {
         const email = formData.get('email') || '';
         const message = formData.get('message') || '';
 
-        // Basic validation
+     
         if (!email || !message) {
             alert('Please provide an email and a short message.');
             return;
         }
 
-        // UX: show a success state — replace with real submit integration in production
+        
         contactForm.querySelectorAll('input, textarea, button').forEach(i => i.disabled = true);
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         if (submitBtn) submitBtn.textContent = 'Sending...';
