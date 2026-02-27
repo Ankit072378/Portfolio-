@@ -838,6 +838,10 @@ span.highlight {
 .profile-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-white); padding: 10px 14px; border-radius: 10px; font-weight: 600; transition: var(--transition); text-decoration: none; }
 .profile-btn:hover { background: var(--primary); border-color: var(--primary); color: #fff; transform: translateY(-3px); }
 
+/* Icon alignment inside profile buttons */
+.profile-btn { display: inline-flex; gap: 8px; align-items: center; }
+.profile-btn i { font-size: 1.05rem; color: var(--text-gray); }
+.profile-btn:hover i { color: #fff; }
 
 /* Brand colors for profile buttons */
 .profile-btn.linkedin i { color: #0A66C2; }
