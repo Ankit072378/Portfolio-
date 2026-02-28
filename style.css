@@ -2,7 +2,7 @@
     --bg-dark: #0f1115;
     --bg-darker: #090a0c;
     --card-bg: #181a20;
-    --primary: #FF7B54; /* Keeping an Orange hue but more vibrant */
+    --primary: #FF7B54; 
     --primary-glow: rgba(255, 123, 84, 0.3);
     --text-white: #ffffff;
     --text-gray: #a1a1aa;
@@ -19,10 +19,10 @@
     scroll-behavior: smooth;
 }
 
-/* Accessibility helpers */
+
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-/* Visible focus for keyboard users */
+
 :focus { outline: none; }
 :focus-visible { outline: 3px solid rgba(255,123,84,0.25); outline-offset: 3px; }
 
@@ -34,7 +34,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Utilities */
+
 .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -97,7 +97,7 @@ span.highlight {
     color: var(--primary);
 }
 
-/* Navbar */
+
 .navbar {
     position: fixed;
     top: 0;
@@ -333,9 +333,6 @@ span.highlight {
     color: var(--primary);
 }
 
-/* =========================================
-   UPDATED EXPERIENCE TIMELINE (Zig-Zag)
-   ========================================= */
 
 .timeline {
     position: relative;
@@ -351,11 +348,11 @@ span.highlight {
     background: var(--border-color); /* Line color */
     top: 0;
     bottom: 0;
-    left: 50%; /* Center mein lane ke liye */
-    margin-left: -1px; /* Perfect center alignment */
+    left: 50%; 
+    margin-left: -1px;
 }
 
-/* Container for each experience item */
+
 .timeline-item {
     padding: 10px 40px;
     position: relative;
@@ -364,14 +361,13 @@ span.highlight {
     box-sizing: border-box;
 }
 
-/* --- Left Side (1st, 3rd items...) --- */
 .timeline-item:nth-child(odd) {
     left: 0;
     text-align: right; /* Text right side align hoga line ki taraf */
     padding-right: 50px; /* Line se thoda gap */
 }
 
-/* Bullet points fix for Left Side (Right align text ke liye) */
+
 .timeline-item:nth-child(odd) .timeline-content ul li {
     padding-left: 0;
     padding-right: 20px;
