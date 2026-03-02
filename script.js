@@ -106,3 +106,83 @@ if (certsGallery && certPrevBtn && certNextBtn) {
         certsGallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     });
 }
+
+// Render PDF thumbnails for any <a class="pdf-link" href="...pdf">
+document.addEventListener('DOMContentLoaded', () => {
+    if (!window.pdfjsLib) return;
+    // set worker src for pdf.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
+
+    document.querySelectorAll('.pdf-link').forEach(async (link) => {
+        const url = link.getAttribute('href');
+        if (!url) return;
+        try {
+            const loadingTask = pdfjsLib.getDocument(url);
+            const pdf = await loadingTask.promise;
+            const page = await pdf.getPage(1);
+            const viewport = page.getViewport({ scale: 1 });
+
+            // compute scale to fit container width
+            const container = link.closest('.certificate-image');
+            const targetWidth = container ? container.clientWidth : viewport.width;
+            const scale = (targetWidth / viewport.width) * 0.95;
+            const vp = page.getViewport({ scale });
+
+            const canvas = document.createElement('canvas');
+            canvas.width = vp.width;
+            canvas.height = vp.height;
+            const ctx = canvas.getContext('2d');
+            await page.render({ canvasContext: ctx, viewport: vp }).promise;
+            canvas.classList.add('pdf-preview-canvas');
+
+            // replace link text with canvas preview but keep link to open PDF
+            link.innerHTML = '';
+            link.appendChild(canvas);
+        } catch (err) {
+            // fallback: keep text link
+            console.error('Failed to render PDF preview:', err);
+        }
+    });
+});
+
+// Make the whole certificate card clickable: open linked PDF or image in a new tab
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.certificate-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // If the click originated inside a real link, let the browser handle it
+            if (e.target.closest('a')) return;
+
+            const pdfLink = card.querySelector('a.pdf-link');
+            const img = card.querySelector('.certificate-image img');
+
+            if (pdfLink && pdfLink.href) {
+                window.open(pdfLink.href, '_blank');
+                return;
+            }
+
+            if (img && img.src) {
+                // If the image file is actually a PDF path, open it directly
+                const src = img.src;
+                if (src.toLowerCase().endsWith('.pdf')) {
+                    window.open(src, '_blank');
+                } else {
+                    // open image in new tab for full-size view
+                    window.open(src, '_blank');
+                }
+            }
+        });
+    });
+});
+
+if (certsGallery && certPrevBtn && certNextBtn) {
+    const cardWidth = certsGallery.querySelector('.certificate-card').offsetWidth;
+    const scrollAmount = (cardWidth + 24) * 4;
+
+    certNextBtn.addEventListener('click', () => {
+        certsGallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    certPrevBtn.addEventListener('click', () => {
+        certsGallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+}

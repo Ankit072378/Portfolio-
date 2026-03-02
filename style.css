@@ -363,8 +363,8 @@ span.highlight {
 
 .timeline-item:nth-child(odd) {
     left: 0;
-    text-align: right; /* Text right side align hoga line ki taraf */
-    padding-right: 50px; /* Line se thoda gap */
+    text-align: right; 
+    padding-right: 50px; 
 }
 
 
@@ -374,10 +374,10 @@ span.highlight {
 }
 .timeline-item:nth-child(odd) .timeline-content ul li::before {
     left: auto;
-    right: 0; /* Bullet point right side shift */
+    right: 0;
 }
 
-/* --- Right Side (2nd, 4th items...) --- */
+
 .timeline-item:nth-child(even) {
     left: 50%;
     text-align: left;
@@ -754,6 +754,37 @@ span.highlight {
     overflow: hidden;
 }
 
+/* allow images/pdf links inside certificate cards */
+.certificate-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.certificate-image a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.certificate-image a:hover {
+    color: var(--text-white);
+}
+
+/* canvas used to render PDF first-page preview */
+.pdf-preview-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .certificate-image::before {
     content: '';
     position: absolute;
@@ -842,7 +873,14 @@ span.highlight {
 /* Brand colors for profile buttons */
 .profile-btn.linkedin i { color: #0A66C2; }
 .profile-btn.github i { color: #fff !important; }
-.profile-btn.twitter i { color: #1DA1F2; }
+/* X uses a custom image instead of a FontAwesome icon */
+.profile-btn.x .x-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+/* retain a fallback color if FontAwesome is accidentally used */
+.profile-btn.x i { color: #000; }
 .profile-btn.resume i { color: var(--primary); }
 .profile-btn.email i { color: #FFB86B; }
 
